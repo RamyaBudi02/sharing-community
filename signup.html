@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>
+            Sign up
+        </title>
+    </head>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<body>
+    <div class="signup-form">
+    <div class="container">
+      <div class="header">
+        <h1>Create an Account</h1>
+        <p>Get started for free!</p>
+      </div>
+      <form>
+        <div class="input">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="user" name="user" placeholder="Username" />
+        </div>
+        <div class="input">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="mail" name="mail" placeholder="Email" />
+        </div>
+        <div class="input">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="Password" />
+        </div>
+        <div class="input">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="pass" name="pass" placeholder="Confirm Password" />
+          </div>
+        <div class="cc">
+            <input type="checkbox" id="sp" name="sp" value="show">
+            <label for="sp">Show Password</label><br>
+            </div> 
+        <input class="signup-btn" type="submit" name="submit" id="submit" value="SIGN UP" />
+      </form>
+      <p>Or sign up with</p>
+      <div class="social-icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-google"></i>
+      </div>
+      <p>Already have an account <a href="login.html">sign in</a></p>
+    </div>
+  </div>
+</body>
+</html>
+<?php 
+    if(isset($_POST['submit']))
+    {
+    $sname = "localhost";
+    $uname = "root";
+    $password = "";
+    
+    $db_name = "project";
+ $user=$_POST['user'];
+ $mail=$_POST['mail'];
+ $pass=$_POST['password'];
+    
+    $conn = mysqli_connect($sname, $uname, $password, $db_name);
+   
+    if (!$conn) {
+        echo "Connection failed!";
+        exit();
+    }
+    $user=$_POST['user'];
+ $mail=$_POST['mail'];
+ $pass=$_POST['password'];
+ 
+
+    
+    $sql = "INSERT INTO signup (user,mail,password) values('$user','$mail','$pass');";
+   $result= mysqli_query($conn, $sql);
+   if($result)
+    {
+      echo "<script>alert('Registered Succesfully')</script>";
+    }
+    else
+    {
+      echo "<script>alert('Registration Failed')</script>";
+    }
+
+ 
+    mysqli_close($conn);
+    }
+    
+?>       
